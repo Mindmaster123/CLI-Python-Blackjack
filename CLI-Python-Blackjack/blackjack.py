@@ -116,13 +116,13 @@ class Blackjack:
         print("Showing hidden card")
         if hidden is not None:
             self.dealer_hit(hidden)
-        while not self.dealer_count < 17 or self.dealer_count < self.player_count:
+        while self.dealer_count < self.player_count or self.dealer_count < 17:
+            if self.dealer_count == 0:
+                break
             if self.dealer_count < 17:
                 self.dealer_hit()
             elif self.player_count > self.dealer_count:
                 self.dealer_hit()
-            else:
-                self.win()
 
     def split(self):
         if not len(self.hands[0]) == 2:
