@@ -1,4 +1,4 @@
-import random
+import random, os
 
 class Blackjack:
     def __init__(self):
@@ -19,6 +19,7 @@ class Blackjack:
         self.score = 0
         self.can_surrender = True
         self.money = "bitcoins"
+        self.stats_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Stats.txt")
 
     def make_deck(self, decks=1):
         while decks > 0:
@@ -31,7 +32,7 @@ class Blackjack:
         random.shuffle(self.deck)
 
     def load_stats(self):
-        with open("Stats.txt", "r") as f:
+        with open(self.stats_path, "r") as f:
             lines = f.readlines()
             self.money_total = int(lines[0])
             self.total_wins = int(lines[1])
@@ -40,7 +41,7 @@ class Blackjack:
             self.score = int(lines[4])
 
     def save_stats(self):
-        with open("Stats.txt", "w") as f:
+        with open(self.stats_path, "w") as f:
             if self.money_total > self.score:
                 self.score = self.money_total
             f.writelines([f"{str(self.money_total)}\n", f"{str(self.total_wins)}\n", f"{str(self.total_loses)}\n"
