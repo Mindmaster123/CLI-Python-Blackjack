@@ -116,7 +116,7 @@ class Blackjack:
         print("Showing hidden card")
         if hidden is not None:
             self.dealer_hit(hidden)
-        while self.dealer_count < self.player_count or self.dealer_count < 17 and self.player_count > 0:
+        while 17 > self.dealer_count > 0:
             if self.dealer_count < 17:
                 self.dealer_hit()
             elif self.player_count > self.dealer_count:
